@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/layout_login_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/login_logo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:src="@mipmap/ic_launcher_foreground"
+            android:tint="?splashIconColor" />
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/card_auth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_logo"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:nextFocusForward="@id/btn_login"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:elevation="1dp"
+            app:cardCornerRadius="@dimen/spacing_normal"
+            app:cardUseCompatPadding="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/spacing_large"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/spacing_large">
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edt_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/username"
+                    android:contentDescription="@string/username"
+                    android:padding="@dimen/spacing_small">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email_id"
+                    android:contentDescription="@string/email_id"
+                    android:padding="@dimen/spacing_small">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_help_24"
+                        android:drawableTint="@color/gray500" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edt_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:contentDescription="@string/password"
+                    android:padding="@dimen/spacing_small">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:id="@+id/forgot_password"
+                    android:paddingEnd="@dimen/spacing_normal"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:text="@string/forgot_password" />
+
+            <LinearLayout
+                    android:id="@+id/layout_tnc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/checkbox_register"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/AppTheme.Body1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:contentDescription="@string/tnc_label_description"
+                        android:text="@string/tnc_label"
+                        tools:ignore="RtlHardcoded" />
+
+                <TextView
+                        android:id="@+id/txt_tnc"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/AppTheme.Body1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tnc"
+                        android:textColor="?colorAccent" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/Widget.Boost.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_auth"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-36dp"
+            android:layout_marginEnd="36dp"
+            android:id="@+id/btn_login"
+            android:nextFocusForward="@id/layout_tabs"
+            android:onClick="loginClicked"
+            android:src="@drawable/ic_arrow_forward_24dp"
+            android:contentDescription="@string/button_label"
+            app:elevation="@dimen/spacing_large" />
+
+    <FrameLayout
+            android:id="@+id/layout_tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_auth"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/AppTheme.Body1"
+                android:layout_margin="@dimen/spacing_normal"
+                android:text="@string/login"
+                android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal"
+                android:textAppearance="@style/AppTheme.Body1"
+                android:text="@string/register"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+    </FrameLayout>
+</RelativeLayout>

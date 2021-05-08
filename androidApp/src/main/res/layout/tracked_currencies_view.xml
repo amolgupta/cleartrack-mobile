@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:id="@+id/tracked_currencies_view"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            style="@style/AppTheme.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:text="@string/tracked_currencies" />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/currency_list"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

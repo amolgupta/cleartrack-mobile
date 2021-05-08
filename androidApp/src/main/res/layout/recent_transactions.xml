@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/spacing_small"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:showIn="@layout/fragment_home">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            style="@style/AppTheme.Subtitle1"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:text="@string/recent_transactions" />
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_transactions"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/add" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/mini_list_transactions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_add_transactions"
+            android:orientation="vertical" />
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_show_all_transactions"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_below="@id/mini_list_transactions"
+            android:padding="@dimen/spacing_normal"
+            android:layout_alignParentEnd="true"
+            android:text="@string/show_all" />
+</RelativeLayout>

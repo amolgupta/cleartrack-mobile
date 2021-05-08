@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_normal"
+        android:paddingBottom="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_large"
+        android:paddingLeft="@dimen/spacing_large"
+        android:background="@drawable/notice_background"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/currency_name"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="@style/AppTheme.Body1"
+            android:layout_height="wrap_content"
+            tools:text="GBP" />
+
+    <xyz.getclear.android.design.NumberView
+            android:id="@+id/currency_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="94.00" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

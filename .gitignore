@@ -1,0 +1,33 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+/.idea/
+/app/release
+shared/build
+androidApp/build
+androidApp/release
+
+*.DS_Store
+
+# Xcode
+iosApp/*.pbxuser
+iosApp/*.mode1v3
+iosApp/*.mode2v3
+iosApp/*.perspectivev3
+iosApp/*.xcuserstate
+iosApp/*.xcworkspace/
+iosApp/project.xcworkspace/
+iosApp/xcuserdata/
+
+# Pods
+iosApp/Pods

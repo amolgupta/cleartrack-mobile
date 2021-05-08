@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lineChartLineColor">@color/yellow</color>
+    <color name="lineChartLegendTextColor">@color/gray100</color>
+    <color name="noticeColor">#55C17F03</color>
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Adding Integration" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/webhook_instructions" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_hook_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:background="@drawable/code_box"
+                android:textSize="12sp"
+                android:padding="@dimen/spacing_normal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_hook_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:textSize="12sp"
+                android:background="@drawable/code_box"
+                android:fontFamily="monospace"
+                android:padding="@dimen/spacing_normal"
+                tools:text="{id = 11123123123}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/webhook_note" />
+
+        <androidx.appcompat.widget.AppCompatButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_hook_share"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_height="wrap_content"
+                android:text="@string/share_instructions" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

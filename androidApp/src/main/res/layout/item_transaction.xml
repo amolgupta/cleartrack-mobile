@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:maxHeight="120dp"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/spacing_large"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingEnd="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_normal">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layout_txn_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_txn_date"
+                style="@style/AppTheme.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="-4dp"
+                tools:text="24" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_txn_month"
+                style="@style/AppTheme.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_txn_date"
+                android:layout_gravity="center_horizontal"
+                tools:text="March" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_txn_pot"
+            style="@style/AppTheme.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_toEndOf="@id/layout_txn_date"
+            tools:text="HSBC Account" />
+
+    <xyz.getclear.android.design.NumberView
+            android:id="@+id/txt_txn_value_base"
+            style="@style/AppTheme.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/transaction_item_menu"
+            tools:text="$1111000" />
+
+    <xyz.getclear.android.design.NumberView
+            android:id="@+id/txt_pot_value_alternate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_txn_value_base"
+            android:layout_toStartOf="@+id/transaction_item_menu"
+            tools:text="123213123123 INR" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/transaction_item_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:paddingStart="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:layout_alignParentEnd="true"
+            android:text="@string/three_dots_menu"
+            android:textAppearance="?android:textAppearanceLarge" />
+</RelativeLayout>

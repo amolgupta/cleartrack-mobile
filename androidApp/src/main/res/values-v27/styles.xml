@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="splashIconColor">@color/blue</item>
+        <item name="iconColor">@color/blue</item>
+
+        <!--Material color attributes -->
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryVariant">@color/yellow</item>
+        <item name="colorSecondary">@color/yellow_dark</item>
+        <item name="colorSecondaryVariant">@color/yellow_dark</item>
+
+        <item name="android:colorBackground">@color/blue</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorError">@color/red</item>
+        <item name="android:popupBackground">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/blue</item>
+        <item name="colorOnBackground">@color/blue</item>
+        <item name="colorOnSurface">@color/blue</item>
+        <item name="colorOnError">@color/gray500</item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Surface</item>
+
+
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="iconTint">@color/blue</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Boost.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Boost.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Boost.LargeComponent</item>
+
+        <item name="bottomSheetDialogTheme">@style/Widget.Boost.BottomSheet.Modal</item>
+        <item name="chipStyle">@style/Widget.Boost.Chip</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Boost.FloatingActionButton</item>
+        <item name="textInputStyle">@style/Widget.Boost.TextInputLayout</item>
+        <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
+
+        <!-- Customize your theme here. -->
+        <item name="android:windowLightNavigationBar">true</item>
+
+    </style>
+</resources>

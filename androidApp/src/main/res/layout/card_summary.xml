@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_home_balance_date"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:paddingStart="@dimen/spacing_small"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:layout_height="wrap_content"
+            tools:text="on 4 Nov" />
+
+    <xyz.getclear.android.design.NumberView
+            android:id="@+id/txt_home_balance"
+            android:layout_toStartOf="@id/txt_home_balance_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="100000000" />
+
+    <xyz.getclear.android.design.report.DetailsLineChart
+            android:id="@+id/chart"
+            android:layout_below="@id/txt_home_balance_date"
+            android:layout_width="match_parent"
+            android:layout_height="240dp" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/slices_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chart"
+        android:layout_centerHorizontal="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="1w"
+            android:text="@string/one_week_label"
+            android:textColor="@color/text_chip_state_list"
+            app:chipBackgroundColor="@color/bg_chip_state_list" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="1m"
+            android:text="@string/One_month_label"
+            android:textColor="@color/text_chip_state_list"
+            app:chipBackgroundColor="@color/bg_chip_state_list" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="3m"
+            android:text="@string/three_month_label"
+            android:textColor="@color/text_chip_state_list"
+            app:chipBackgroundColor="@color/bg_chip_state_list" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="6m"
+            android:text="@string/six_month_label"
+            android:textColor="@color/text_chip_state_list"
+            app:chipBackgroundColor="@color/bg_chip_state_list" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="1y"
+            android:text="@string/one_year_label"
+            android:textColor="@color/text_chip_state_list"
+            app:chipBackgroundColor="@color/bg_chip_state_list" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="max"
+            android:text="@string/max_duration_label"
+            android:textColor="@color/text_chip_state_list"
+            app:chipBackgroundColor="@color/bg_chip_state_list" />
+    </com.google.android.material.chip.ChipGroup>
+
+</RelativeLayout>

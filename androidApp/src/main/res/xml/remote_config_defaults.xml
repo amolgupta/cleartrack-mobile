@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>free_transaction_limit</key>
+        <value>100</value>
+    </entry>
+    <entry>
+        <key>min_version</key>
+        <value>9</value>
+    </entry>
+</defaultsMap>

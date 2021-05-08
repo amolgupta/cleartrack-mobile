@@ -1,0 +1,125 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="splashIconColor">@color/yellow</item>
+        <item name="iconColor">@color/yellow</item>
+        <!--Material color attributes -->
+        <item name="colorPrimary">@color/yellow_dark</item>
+        <item name="colorPrimaryVariant">@color/yellow_dark</item>
+        <item name="colorSecondary">@color/yellow_dark</item>
+        <item name="colorSecondaryVariant">@color/yellow_dark</item>
+        <item name="android:popupBackground">@color/gray500</item>
+        <item name="android:colorBackground">@color/blue</item>
+        <item name="colorSurface">@color/blue</item>
+        <item name="colorError">@color/red</item>
+
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/blue</item>
+        <item name="colorOnBackground">@color/blue</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorOnError">@color/gray500</item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Surface</item>
+
+        <item name="android:windowBackground">@color/blue</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="iconTint">@color/blue</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Boost.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Boost.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Boost.LargeComponent
+        </item>
+
+        <item name="bottomSheetDialogTheme">@style/Widget.Boost.BottomSheet.Modal</item>
+        <item name="chipStyle">@style/Widget.Boost.Chip</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Boost.FloatingActionButton</item>
+        <item name="textInputStyle">@style/Widget.Boost.TextInputLayout</item>
+        <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Headline5" parent="TextAppearance.MaterialComponents.Headline5" />
+
+    <style name="AppTheme.Headline6" parent="TextAppearance.MaterialComponents.Headline6" />
+
+    <style name="AppTheme.Body1" parent="TextAppearance.MaterialComponents.Body1" />
+
+    <style name="AppTheme.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.BalanceText" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/yellow</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ShapeAppearance.Boost.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Boost.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Boost.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="Widget.Boost.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.Boost.LargeComponent</item>
+        <item name="backgroundTint">@color/yellow</item>
+        <item name="tint">@color/blue</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="iconTint">@color/blue</item>
+    </style>
+
+    <style name="Widget.Boost.Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipCornerRadius">@null</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Boost.Chip</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Boost.Chip" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="Widget.Boost.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox" />
+
+    <style name="Theme.Boost.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Boost.BottomSheet.Modal</item>
+    </style>
+
+    <style name="Widget.Boost.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="android:background">?android:windowBackground</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Boost.BottomSheet</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Boost.BottomSheet" parent="">
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="AppTheme.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
+        <item name="android:layout">@layout/activity_settings</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@color/blue</item>
+    </style>
+</resources>

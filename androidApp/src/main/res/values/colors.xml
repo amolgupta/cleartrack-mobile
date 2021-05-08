@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    see https://coolors.co/031926-f3a712-011936-9c0d38-d8cbc7-->
+    <color name="white">#FFFFFF</color>
+    <color name="yellow">#f3a311</color>
+    <color name="yellow_dark">#f3a712</color>
+    <color name="blue">#011936</color>
+    <color name="red">#9c0d38</color>
+    <color name="gray500">#838385</color>
+    <color name="gray100">#DDDDDD</color>
+
+    <color name="lineChartLineColor">@color/blue</color>
+    <color name="lineChartLegendTextColor">@color/blue</color>
+    <color name="noticeColor">#33011936</color>
+</resources>

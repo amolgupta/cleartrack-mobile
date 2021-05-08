@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/spacing_large"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical"
+    android:layout_height="wrap_content"
+    >
+
+    <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txt_pot_name"
+            style="@style/AppTheme.Subtitle1"
+            android:paddingStart="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingBottom="@dimen/spacing_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:layout_alignParentStart="true"
+            android:maxLines="1"
+            android:layout_toStartOf="@id/chart_pot"
+            tools:text="HSBC Account 123123123123 123123123 123123123 123123" />
+
+    <xyz.getclear.android.design.NumberView
+            android:id="@+id/txt_pot_value"
+            android:paddingTop="@dimen/spacing_small"
+            android:paddingStart="@dimen/spacing_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_pot_name"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            tools:text="500000"
+            tools:ignore="RtlSymmetry" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_pot_currency"
+            android:layout_width="wrap_content"
+            tools:text="USD"
+            android:paddingStart="@dimen/spacing_small"
+            android:paddingEnd="@dimen/spacing_small"
+            android:layout_alignBaseline="@id/txt_pot_value"
+            android:layout_toEndOf="@id/txt_pot_value"
+            android:layout_below="@id/txt_pot_name"
+            style="@style/TextAppearance.MaterialComponents.Overline"
+            android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pot_item_menu"
+            android:layout_width="32dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/three_dots_menu"
+            android:textAppearance="?android:textAppearanceLarge"/>
+
+    <xyz.getclear.android.design.report.MiniLineChart
+            android:id="@+id/chart_pot"
+            android:minHeight="44dp"
+            android:visibility="gone"
+            android:layout_toStartOf="@+id/pot_item_menu"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_width="108dp"
+            android:layout_height="44dp"/>
+</RelativeLayout>

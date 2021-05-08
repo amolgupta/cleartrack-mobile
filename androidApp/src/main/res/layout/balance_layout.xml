@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:showIn="@layout/fragment_home">
+
+    <xyz.getclear.android.design.NumberView
+            android:id="@+id/txt_balance"
+            style="@style/AppTheme.Headline5"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            tools:text="100000000" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:layout_below="@id/txt_balance"
+            android:id="@+id/txt_home_balance_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            tools:text="50%" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_home_balance_change_date"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@id/txt_home_balance_change"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_home_balance_change"
+            android:layout_marginTop="@dimen/spacing_large"
+            tools:text="since 10 May" />
+</RelativeLayout>

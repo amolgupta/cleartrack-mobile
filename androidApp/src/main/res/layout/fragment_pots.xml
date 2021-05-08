@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            app:title="@string/pots" />
+
+
+    <include
+            android:id="@+id/view_no_pots"
+            layout="@layout/layout_no_pots"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/toolbar"/>
+
+    <ProgressBar
+            android:id="@+id/progress_pots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_pots"
+            android:layout_below="@id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false"
+            android:paddingBottom="@dimen/bottom_space"
+            android:clipToPadding="false"
+            />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab"
+            android:text="@string/add"
+            style="@style/Widget.Boost.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/fab_margin_bottom"
+            app:elevation="12dp"
+            app:icon="@drawable/ic_add_24dp" />
+</RelativeLayout>

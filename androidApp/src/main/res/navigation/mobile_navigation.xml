@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:startDestination="@id/menu_transactions"
+        android:id="@+id/main">
+
+    <fragment
+            android:id="@+id/menu_transactions"
+            android:name="xyz.getclear.android.home.HomeFragment"
+            android:label="@string/home"
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_menu_transactions_to_frag_all_transactions"
+                app:destination="@id/frag_all_transactions" />
+    </fragment>
+    <fragment
+            android:id="@+id/menu_reports"
+            android:name="xyz.getclear.android.report.ReportsFragment"
+            android:label="@string/reports_title"
+            tools:layout="@layout/fragment_reports" />
+
+    <fragment
+            android:id="@+id/menu_pots"
+            android:name="xyz.getclear.android.pot.PotsFragment"
+            android:label="@string/accounts"
+            tools:layout="@layout/fragment_pots" />
+    <action
+            android:id="@+id/show_pot_details"
+            app:destination="@+id/frag_details"/>
+
+    <action
+            android:id="@+id/add_transaction"
+            app:destination="@+id/menu_add_transaction"/>
+
+    <fragment
+            android:id="@+id/menu_preferences"
+            android:name="xyz.getclear.android.settings.SettingsFragment"
+            android:label="@string/settings"
+            tools:layout="@layout/activity_settings" />
+
+    <fragment
+            android:id="@+id/add_pot"
+            android:name="xyz.getclear.android.pot.AddPotFragment"
+            tools:layout="@layout/fragment_add_pot">
+        <argument
+                app:nullable="true"
+                android:name="pot_id"
+                app:argType="string" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/frag_details"
+            android:name="xyz.getclear.android.details.DetailsFragment"
+            tools:layout="@layout/fragment_details">
+        <argument
+                android:name="pot_id"
+                app:argType="string" />
+        <action
+                android:id="@+id/action_frag_details_to_dialog_webhook"
+                app:destination="@id/dialog_webhook" />
+        <action
+                android:id="@+id/action_frag_details_to_menu_add_transaction"
+                app:destination="@id/menu_add_transaction" />
+    </fragment>
+
+    <dialog
+            android:id="@+id/dialog_webhook"
+            android:name="xyz.getclear.android.details.WebHookDetailsFragment"
+            android:label="@string/webhook_instructions"
+            tools:layout="@layout/fragment_webhook">
+        <argument
+                android:name="token"
+                app:argType="string" />
+    </dialog>
+
+    <fragment
+            android:id="@+id/menu_add_transaction"
+            android:name="xyz.getclear.android.transaction.AddTransactionFragment"
+            android:label="@string/add"
+            tools:layout="@layout/fragment_add_transaction">
+        <argument
+                android:name="pot_id"
+                app:argType="string" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/frag_all_transactions"
+            android:name="xyz.getclear.android.transaction.AllTransactionsFragment"
+            tools:layout="@layout/fragment_all_transactions" />
+
+    <fragment
+            android:id="@+id/dialog_pot_picker"
+            android:name="xyz.getclear.android.pot.PotPicker"
+            android:label="@string/add"
+            app:destination="@id/pick_pot"
+            tools:layout="@layout/fragment_pots_picker" />
+
+    <action
+            android:id="@+id/pick_pot"
+            app:destination="@+id/dialog_pot_picker" />
+
+    <action
+            android:id="@+id/action_add_pot"
+            app:destination="@+id/add_pot" />
+</navigation>

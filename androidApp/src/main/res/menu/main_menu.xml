@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:ignore="AlwaysShowAction">
+    <item
+            android:id="@+id/menu_transactions"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/menu_reports"
+            android:icon="@drawable/ic_chart"
+            android:title="@string/reports"
+            app:showAsAction="always" />
+
+    <item
+            android:id="@+id/menu_pots"
+            android:icon="@drawable/ic_monetization_24dp"
+            android:title="@string/accounts"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/menu_preferences"
+            android:icon="@drawable/ic_settings_24dp"
+            android:title="@string/settings"
+            app:showAsAction="always" />
+</menu>

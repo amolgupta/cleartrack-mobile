@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:ignore="AlwaysShowAction">
+    <item
+            android:id="@+id/menu_add_transaction"
+            android:title="@string/add"
+            app:iconTint="?iconColor"
+            android:icon="@drawable/ic_add_24dp"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/menu_delete_pot"
+            android:title="@string/delete"
+            app:iconTint="?iconColor"
+            android:icon="@drawable/ic_delete_black_24dp"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/menu_edit"
+            android:title="@string/edit_account"
+            android:icon="@drawable/ic_edit_24"
+            app:iconTint="?iconColor"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/menu_hook"
+            android:title="@string/add_integration"
+            android:icon="@drawable/ic_link_24"
+            app:iconTint="?iconColor"
+            app:showAsAction="always" />
+</menu>
