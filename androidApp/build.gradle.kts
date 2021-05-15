@@ -14,7 +14,7 @@ group = "xyz.cleartrack"
 version = "0.1-SNAPSHOT"
 
 dependencies {
-    val koinVersion = "3.0.1-beta-1"
+    val koinVersion = "3.0.1"
 
     implementation(project(":shared"))
     implementation("androidx.appcompat:appcompat:1.2.0")

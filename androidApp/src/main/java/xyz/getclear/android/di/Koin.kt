@@ -71,6 +71,7 @@ val appModule = module {
     single<AnalyticsWrapper> { AnalyticsWrapperImpl(androidContext()) }
     single<CoroutineContext> { Dispatchers.Unconfined }
     single { CoroutineScope(get()) }
+
     // Mappers
     factory { OneSignalNotificationReceivedHandler(get(), get()) }
     factory<NetworkConnectivityUseCase> { NetworkConnectivityUseCaseImpl(get()) }
@@ -79,6 +80,7 @@ val appModule = module {
     factory<PushNotificationInitializer> { PushNotificationInitializerImpl(get()) }
     factory<NotificationHandler> { OneSignalNotificationReceivedHandler(get(), get()) }
     factory { AppliedTags() }
+
     // ViewModels
     viewModel { AuthViewModel() }
     viewModel { SettingsViewModel() }
@@ -90,6 +92,4 @@ val appModule = module {
     viewModel { AddPotViewModel() }
     viewModel { AppStartViewModel() }
     viewModel { PotPickerViewModel() }
-
-
 }

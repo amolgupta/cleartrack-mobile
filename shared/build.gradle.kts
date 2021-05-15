@@ -21,7 +21,7 @@ kotlin {
     }
     sourceSets {
         val commonMain by getting {
-            val koinVersion = "3.0.1-beta-1"
+            val koinVersion = "3.0.1"
             dependencies {
                 api("dev.icerock.moko:mvvm-core:0.9.2") // only ViewModel, EventsDispatcher, Dispatchers.UI
                 api("dev.icerock.moko:mvvm-livedata:0.9.2") // api mvvm-core, LiveData and extensions
@@ -38,7 +38,7 @@ kotlin {
                 implementation("org.json:json:20201115")
                 implementation("commons-lang:commons-lang:2.6")
                 implementation("io.insert-koin:koin-core:$koinVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
             }
         }
         val commonTest by getting {
