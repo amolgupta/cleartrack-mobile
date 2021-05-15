@@ -28,7 +28,7 @@ class PushNotificationInitializerImpl(
     }
 
     override fun initialize() {
-        OneSignal.NotificationReceivedHandler { handler }
+        OneSignal.OSNotificationOpenedHandler { handler }
     }
 
     override fun removeUser() {

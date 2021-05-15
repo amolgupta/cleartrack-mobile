@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.onesignal.androidsdk.onesignal-gradle-plugin")
     kotlin("android")
     id("kotlin-android-extensions")
     id("androidx.navigation.safeargs.kotlin")
@@ -27,22 +28,22 @@ dependencies {
     api("androidx.constraintlayout:constraintlayout:2.0.4")
     api("androidx.core:core-ktx:1.3.2")
 
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     api("androidx.preference:preference-ktx:1.1.1")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.4")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("androidx.security:security-crypto:1.1.0-alpha03")
     implementation("io.ktor:ktor-client-android:1.5.1")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
 
-    api("com.google.firebase:firebase-core:18.0.2")
-    api("com.google.firebase:firebase-analytics:18.0.2")
-    api("com.google.firebase:firebase-perf-ktx:19.1.1")
-    api("com.onesignal:OneSignal:3.12.3") {
+    api("com.google.firebase:firebase-core:19.0.0")
+    api("com.google.firebase:firebase-analytics:19.0.0")
+    api("com.google.firebase:firebase-perf-ktx:20.0.0")
+    api("com.onesignal:OneSignal:[4.0.0, 4.99.99]") {
         exclude("com.google.android")
     }
     api("com.squareup.picasso:picasso:2.71828")
@@ -61,8 +62,6 @@ android {
         targetSdkVersion(30)
         versionCode = 31
         versionName = "0.112"
-        manifestPlaceholders["onesignal_app_id"] = "cd4aad6e-140a-4e03-82ed-ece18bb53108"
-        manifestPlaceholders["onesignal_google_project_number"] = "REMOTE"
     }
     buildTypes {
         getByName("release") {

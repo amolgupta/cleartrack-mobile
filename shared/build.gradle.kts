@@ -75,7 +75,7 @@ android {
         targetSdkVersion(30)
     }
 }
-//
+
 val packForXcode by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"

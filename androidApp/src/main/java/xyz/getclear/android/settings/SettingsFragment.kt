@@ -60,7 +60,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SettingsView,
                 sharedPreferences.getString(BASE_CURRENCY, DEFAULT_CURRENCY)
             restartActivity()
         } else if (key == SHOW_NOTIFICATIONS) {
-            OneSignal.setSubscription(sharedPreferences.getBoolean(SHOW_NOTIFICATIONS, true))
+            OneSignal.disablePush(!sharedPreferences.getBoolean(SHOW_NOTIFICATIONS, true))
         }
     }
 

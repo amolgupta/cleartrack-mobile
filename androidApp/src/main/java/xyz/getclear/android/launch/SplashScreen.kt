@@ -9,6 +9,7 @@ import androidx.appcompat.view.ContextThemeWrapper
 import xyz.getclear.android.R
 import com.onesignal.OneSignal
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import xyz.getclear.android.BuildConfig
 import xyz.getclear.android.common.BaseActivity
 import xyz.getclear.android.login.AuthActivity
 import xyz.getclear.android.navigation.MainActivity
@@ -57,10 +58,8 @@ class SplashActivity : BaseActivity(), AppStartView {
     }
 
     private fun initOneSignal() {
-        OneSignal.startInit(applicationContext)
-            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-            .unsubscribeWhenNotificationsAreDisabled(true)
-            .init()
+        OneSignal.setAppId("cd4aad6e-140a-4e03-82ed-ece18bb53108")
+        OneSignal.initWithContext(applicationContext)
     }
 
     override fun launchMainActivity() {
