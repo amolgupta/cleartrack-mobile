@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.CheckBoxPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -18,10 +19,8 @@ import xyz.getclear.android.data.BASE_URL
 import com.google.android.material.snackbar.Snackbar
 import com.onesignal.OneSignal
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.CircleTransform
@@ -49,6 +48,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SettingsView,
 
     private var usernamePreference: Preference? = null
     private var subscription: Preference? = null
+    private var uiStateJob: Job? = null
 
     override fun onSharedPreferenceChanged(
         sharedPreferences: SharedPreferences,
@@ -131,21 +131,24 @@ class SettingsFragment : PreferenceFragmentCompat(), SettingsView,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.start()
-        model.viewState.addObserver { state ->
-            when (state) {
+        uiStateJob = lifecycleScope.launch {
 
-                is SettingsViewState.Data -> {
-                    displayCurrencies(state.currencies)
-                    state.email?.let { displayEmailId(it) }
-                    state.username?.let { displayUsername(it) }
-                    state.image?.let { displayUserImage(it) }
-                    state.subscriptionEndDate?.let { displaySubscriptionEndDate(it) }
-                }
-                is SettingsViewState.Error -> {
-                    showError(state.error)
-                }
-                is SettingsViewState.RestartEvent -> {
-                    restartActivity()
+            model.viewState.collect { state ->
+                when (state) {
+
+                    is SettingsViewState.Data -> {
+                        displayCurrencies(state.currencies)
+                        state.email?.let { displayEmailId(it) }
+                        state.username?.let { displayUsername(it) }
+                        state.image?.let { displayUserImage(it) }
+                        state.subscriptionEndDate?.let { displaySubscriptionEndDate(it) }
+                    }
+                    is SettingsViewState.Error -> {
+                        showError(state.error)
+                    }
+                    is SettingsViewState.RestartEvent -> {
+                        restartActivity()
+                    }
                 }
             }
         }
@@ -221,6 +224,10 @@ class SettingsFragment : PreferenceFragmentCompat(), SettingsView,
                 finish()
             }
         }
+    }
+    override fun onStop() {
+        uiStateJob?.cancel()
+        super.onStop()
     }
 
     companion object {

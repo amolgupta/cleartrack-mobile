@@ -9,9 +9,13 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doBeforeTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.ViewBindingHolder
@@ -20,7 +24,6 @@ import xyz.getclear.android.databinding.FragmentAddTransactionBinding
 import xyz.getclear.vm.addTransaction.AddTransactionViewModel
 import xyz.getclear.vm.addTransaction.AddTransactionViewState
 
-// Refactor and move logic to VM
 class AddTransactionFragment : Fragment(),
     ViewBindingHolder<FragmentAddTransactionBinding> by ViewBindingHolderImpl() {
 
@@ -31,12 +34,17 @@ class AddTransactionFragment : Fragment(),
     private val model: AddTransactionViewModel by viewModel()
 
     private val args: AddTransactionFragmentArgs by navArgs()
+    private var uiStateJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model.start(args.potId)
     }
 
+    override fun onStop() {
+        uiStateJob?.cancel()
+        super.onStop()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,28 +56,30 @@ class AddTransactionFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        uiStateJob = lifecycleScope.launch {
 
-        model.viewState.addObserver { state ->
-            when (state) {
-                is AddTransactionViewState.Error -> {
-                    showError(message = state.message)
-                }
-                is AddTransactionViewState.Data -> {
-                    requireBinding {
-                        progressbar.isVisible = false
-                        txnAddToolbar.title = state.title
+            model.viewState.collect { state ->
+                when (state) {
+                    is AddTransactionViewState.Error -> {
+                        showError(message = state.message)
                     }
-                    date = state.date
-                    setupTextFields(state.balance)
-                }
-                is AddTransactionViewState.Loading -> {
-                    requireBinding().progressbar.isVisible = true
-                }
-                is AddTransactionViewState.Complete -> {
-                    requireBinding().progressbar.isVisible = false
-                    findNavController().navigateUp()
-                }
-                else -> {
+                    is AddTransactionViewState.Data -> {
+                        requireBinding {
+                            progressbar.isVisible = false
+                            txnAddToolbar.title = state.title
+                        }
+                        date = state.date
+                        setupTextFields(state.balance)
+                    }
+                    is AddTransactionViewState.Loading -> {
+                        requireBinding().progressbar.isVisible = true
+                    }
+                    is AddTransactionViewState.Complete -> {
+                        requireBinding().progressbar.isVisible = false
+                        findNavController().navigateUp()
+                    }
+                    else -> {
+                    }
                 }
             }
         }

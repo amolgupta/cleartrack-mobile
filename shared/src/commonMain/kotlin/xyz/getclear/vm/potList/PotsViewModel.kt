@@ -1,10 +1,10 @@
 package xyz.getclear.vm.potList
 
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -21,8 +21,8 @@ class PotsViewModel : ViewModel(), KoinComponent {
     private val analyticsWrapper: AnalyticsWrapper by inject()
     private val mapper: PotToPotUiModelMapper by inject()
 
-    private val _viewState = MutableLiveData<PotsViewState>(PotsViewState.Loading)
-    val viewState: LiveData<PotsViewState> = _viewState
+    private val _viewState = MutableStateFlow<PotsViewState>(PotsViewState.Loading)
+    val viewState: StateFlow<PotsViewState> = _viewState
 
     private val eventChannel = Channel<PotsEvents>(Channel.BUFFERED)
     val eventsFlow = eventChannel.receiveAsFlow()
@@ -63,13 +63,13 @@ class PotsViewModel : ViewModel(), KoinComponent {
                 analyticsWrapper.logEvent(EVENT_DELETE_POT)
 
             } catch (e: Exception) {
-                _viewState.postValue(PotsViewState.Error(e.message ?: "Error"))
+                emmitState(PotsViewState.Error(e.message ?: "Error"))
             }
         }
     }
 
     private fun emmitState(state: PotsViewState) {
-        _viewState.postValue(state)
+        _viewState.value = state
     }
 
     private fun addPot() {

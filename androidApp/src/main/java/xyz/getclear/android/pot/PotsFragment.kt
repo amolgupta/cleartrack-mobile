@@ -11,8 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import xyz.getclear.android.R
 import xyz.getclear.android.databinding.FragmentPotsBinding
 import xyz.getclear.android.details.DetailsFragmentDirections
@@ -28,6 +31,8 @@ class PotsFragment : Fragment(),
     private val model: PotsViewModel by viewModel()
 
     private val adapter = PotAdapter()
+
+    private var uiStateJob: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,20 +72,23 @@ class PotsFragment : Fragment(),
             }
         }
         model.process(PotsCommand.Start)
-        model.viewState.addObserver { state ->
-            when (state) {
-                is PotsViewState.Loading -> {
-                    setState(State.PROGRESS)
+        uiStateJob = lifecycleScope.launch {
+
+            model.viewState.collect { state ->
+                when (state) {
+                    is PotsViewState.Loading -> {
+                        setState(State.PROGRESS)
+                    }
+                    is PotsViewState.Data -> {
+                        setState(State.DATA)
+                        displayPots(ArrayList(state.data))
+                    }
+                    PotsViewState.NoPots -> {
+                        setState(State.NO_DATA)
+                        displayPots(arrayListOf())
+                    }
+                    is PotsViewState.Error -> setState(State.ERROR)
                 }
-                is PotsViewState.Data -> {
-                    setState(State.DATA)
-                    displayPots(ArrayList(state.data))
-                }
-                PotsViewState.NoPots -> {
-                    setState(State.NO_DATA)
-                    displayPots(arrayListOf())
-                }
-                is PotsViewState.Error -> setState(State.ERROR)
             }
         }
         model.eventsFlow.onEach {
@@ -138,6 +146,10 @@ class PotsFragment : Fragment(),
                 dialog.dismiss()
             }
             .show()
+    }
+    override fun onStop() {
+        uiStateJob?.cancel()
+        super.onStop()
     }
 
     private fun addPot() {

@@ -1,9 +1,9 @@
 package xyz.getclear.vm.details
 
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -20,11 +20,11 @@ class DetailsViewModel : ViewModel(), KoinComponent {
 
     private lateinit var potId: String
     private var dateRange = DateRange.THREE_MONTH
-    private val _viewState = MutableLiveData<DetailsViewState?>(null)
-    private val _events = MutableLiveData<DetailsEvents?>(null)
+    private val _viewState = MutableStateFlow<DetailsViewState?>(null)
+    private val _events = MutableStateFlow<DetailsEvents?>(null)
 
-    val viewState: LiveData<DetailsViewState?> = _viewState
-    val events: LiveData<DetailsEvents?> = _events
+    val viewState: StateFlow<DetailsViewState?> = _viewState
+    val events: StateFlow<DetailsEvents?> = _events
 
     fun start(potId: String) {
         this.potId = potId
@@ -39,19 +39,17 @@ class DetailsViewModel : ViewModel(), KoinComponent {
     private fun updateState() {
         scope.launch {
             dataRepository.getPot(potId)?.let { pot ->
-                _viewState.postValue(
-                    dataRepository.getPot(potId)?.let {
-                        DetailsViewState(
-                            title = pot.name,
-                            data = transactionViewItemMapper(pot),
-                            entries = chartMapper.getData(
-                                it,
-                                dateRange
-                            ),
-                            tags = pot.tags
-                        )
-                    }
-                )
+                _viewState.value = dataRepository.getPot(potId)?.let {
+                    DetailsViewState(
+                        title = pot.name,
+                        data = transactionViewItemMapper(pot),
+                        entries = chartMapper.getData(
+                            it,
+                            dateRange
+                        ),
+                        tags = pot.tags
+                    )
+                }
             }
         }
     }
@@ -62,7 +60,7 @@ class DetailsViewModel : ViewModel(), KoinComponent {
                 dataRepository.deleteTransaction(id)
                 updateState()
             } catch (e: Exception) {
-                _events.postValue(e.message?.let { DetailsEvents.Error(it) })
+                _events.value = e.message?.let { DetailsEvents.Error(it) }
             }
         }
     }
@@ -73,7 +71,7 @@ class DetailsViewModel : ViewModel(), KoinComponent {
                 try {
                     dataRepository.deletePot(it)
                 } catch (e: Exception) {
-                    _events.postValue(DetailsEvents.Error(e.message ?: "Error"))
+                    _events.value = DetailsEvents.Error(e.message ?: "Error")
                 }
             }
         }

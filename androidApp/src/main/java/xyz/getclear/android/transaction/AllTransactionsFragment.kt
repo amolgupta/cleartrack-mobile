@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import xyz.getclear.android.databinding.FragmentAllTransactionsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.ViewBindingHolder
@@ -22,6 +26,8 @@ class AllTransactionsFragment : Fragment(),
 
     private val model: HomeViewModel by viewModel()
 
+    private var uiStateJob: Job? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,10 +42,16 @@ class AllTransactionsFragment : Fragment(),
         requireBinding().listTransactions.adapter = adapter
 
         model.process(HomeCommand.Start)
-        model.viewState.addObserver {  state ->
-            when (state) {
-                is HomeViewState.Data -> { displayTransactions(state.data) }
-                else -> { }
+        uiStateJob = lifecycleScope.launch {
+
+            model.viewState.collect { state ->
+                when (state) {
+                    is HomeViewState.Data -> {
+                        displayTransactions(state.data)
+                    }
+                    else -> {
+                    }
+                }
             }
         }
     }
