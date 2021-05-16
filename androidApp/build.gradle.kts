@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("com.onesignal.androidsdk.onesignal-gradle-plugin")
     kotlin("android")
-    id("kotlin-android-extensions")
     id("androidx.navigation.safeargs.kotlin")
     id("koin")
     id("kotlin-android")
@@ -37,8 +36,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("androidx.security:security-crypto:1.1.0-alpha03")
-    implementation("io.ktor:ktor-client-android:1.5.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
+    implementation("io.ktor:ktor-client-android:1.5.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
 
     api("com.google.firebase:firebase-core:19.0.0")
     api("com.google.firebase:firebase-analytics:19.0.0")

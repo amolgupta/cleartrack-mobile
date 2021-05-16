@@ -20,15 +20,21 @@ jobs:
           command: ./gradlew androidDependencies
 
       - run:
+          name: Build iOS
+          command: ./gradlew :shared:compileKotlinIosX64
+
+      - run:
           name: Build debug apk
           command: ./gradlew assembleDebug
 
       - run:
           name: Build test apk
           command: ./gradlew :androidApp:assembleDebugAndroidTest
+
       - run:
           name: Test
           command: ./gradlew test
+
       - save_cache:
           paths:
             - ~/.gradle
