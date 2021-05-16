@@ -11,10 +11,14 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.lifecycle.lifecycleScope
 import xyz.getclear.android.R
 import xyz.getclear.android.data.BASE_URL
 import xyz.getclear.android.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.BaseActivity
 import xyz.getclear.android.navigation.MainActivity
@@ -30,6 +34,7 @@ class AuthActivity : BaseActivity() {
     private val model: AuthViewModel by viewModel()
 
     private var binding: ActivityLoginBinding? = null
+    private var uiStateJob: Job? = null
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,26 +66,34 @@ class AuthActivity : BaseActivity() {
 
             txtTnc.setOnClickListener { model.dispatch(AuthCommand.TermsAndConditions) }
         }
+        uiStateJob = lifecycleScope.launch {
 
-        model.viewState.addObserver { state ->
-            when (state) {
-                is AuthViewState.Success -> {
-                    navigateToMainActivity()
-                }
-                is AuthViewState.Error -> {
-                    resetErrors()
-                    showError(state)
-                }
-                is AuthViewState.EmailDialog ->
-                    showEmailDialog()
-                is AuthViewState.TermsAndConditions ->
-                    openTermsAndConditions()
-                is AuthViewState.ViewType -> {
-                    resetErrors()
-                    setFormState(state.viewType)
+            model.viewState.collect { state ->
+                when (state) {
+                    is AuthViewState.Success -> {
+                        navigateToMainActivity()
+                    }
+                    is AuthViewState.Error -> {
+                        resetErrors()
+                        showError(state)
+                    }
+                    is AuthViewState.EmailDialog ->
+                        showEmailDialog()
+                    is AuthViewState.TermsAndConditions ->
+                        openTermsAndConditions()
+                    is AuthViewState.ViewType -> {
+                        resetErrors()
+                        setFormState(state.viewType)
+                    }
                 }
             }
         }
+    }
+
+
+    override fun onStop() {
+        uiStateJob?.cancel()
+        super.onStop()
     }
 
     @SuppressLint("CheckResult")

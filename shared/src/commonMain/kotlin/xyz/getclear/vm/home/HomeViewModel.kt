@@ -1,9 +1,9 @@
 package xyz.getclear.vm.home
 
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.*
 import kotlinx.datetime.TimeZone.Companion.UTC
@@ -28,8 +28,8 @@ class HomeViewModel : ViewModel(), KoinComponent {
     private val chartMapper: ChartMapper by inject()
     private var startDate = DateRange.THREE_MONTH
 
-    private val _viewState = MutableLiveData<HomeViewState>(HomeViewState.Loading)
-    val viewState: LiveData<HomeViewState> = _viewState
+    private val _viewState = MutableStateFlow<HomeViewState>(HomeViewState.Loading)
+    val viewState: StateFlow<HomeViewState> = _viewState
 
     fun process(command: HomeCommand) {
         when (command) {
@@ -81,7 +81,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
     }
 
     private fun emitState(state: HomeViewState) {
-        _viewState.postValue(state)
+        _viewState.value = state
     }
 
     private fun DateRange.getStartTime(): LocalDate {

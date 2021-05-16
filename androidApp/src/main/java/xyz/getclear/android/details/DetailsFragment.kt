@@ -7,10 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomappbar.BottomAppBar
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.R
 import xyz.getclear.android.common.ViewBindingHolder
@@ -28,6 +32,8 @@ class DetailsFragment : Fragment(), Toolbar.OnMenuItemClickListener,
     private val args: DetailsFragmentArgs by navArgs()
 
     private val viewModel: DetailsViewModel by viewModel()
+
+    private var uiStateJob: Job? = null
 
     private val adapter: TransactionsAdapter by lazy {
         TransactionsAdapter(emptyList()) {
@@ -69,16 +75,23 @@ class DetailsFragment : Fragment(), Toolbar.OnMenuItemClickListener,
             }
         }
         viewModel.start(potId)
-        viewModel.viewState.addObserver { state ->
-            state?.let { renderState(state, adapter) }
-        }
-        viewModel.events.addObserver { event ->
-            when (event) {
-                is DetailsEvents.Error -> showError(bottomAppBar, event.error)
-                DetailsEvents.Deleted -> activity?.finish()
+        uiStateJob = lifecycleScope.launch {
+
+            viewModel.viewState.collect { state ->
+                state?.let { renderState(it, adapter) }
+            }
+            viewModel.events.collect { event ->
+                when (event) {
+                    is DetailsEvents.Error -> showError(bottomAppBar, event.error)
+                    DetailsEvents.Deleted -> activity?.finish()
+                }
             }
         }
-        viewModel.start(potId)
+    }
+
+    override fun onStop() {
+        uiStateJob?.cancel()
+        super.onStop()
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {

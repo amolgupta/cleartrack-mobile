@@ -1,9 +1,9 @@
 package xyz.getclear.vm.appStart
 
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -21,30 +21,27 @@ class AppStartViewModel: ViewModel(), KoinComponent {
     private val pushNotificationInitializer: PushNotificationInitializer by inject()
     private val networkConnectivityUseCase: NetworkConnectivityUseCase by inject()
 
-    private val _viewState = MutableLiveData<AppStartViewState>(AppStartViewState.Loading)
-    val viewState: LiveData<AppStartViewState> = _viewState
 
-    private val _networkError = MutableLiveData<Unit?>(null)
-    val networkError: LiveData<Unit?> = _networkError
+    private val eventChannel = Channel<AppStartEvents>(Channel.BUFFERED)
+    val eventsFlow = eventChannel.receiveAsFlow()
 
     // App start sequence
     fun start() {
-        _viewState.postValue(AppStartViewState.Loading)
         scope.launch {
             try {
                 if (networkConnectivityUseCase.isNetworkAvailable()) {
                     val user = userRepository.getUser()
                     initPush(user)
                     currencyRepository.getCurrencies()
-                    _viewState.postValue(AppStartViewState.Success)
+                    sendEvent(AppStartEvents.Success)
                     initOneSignal()
                 } else {
-                    _networkError.postValue(Unit)
+                    sendEvent(AppStartEvents.NetworkError)
                 }
             } catch (e: UserError) {
-                _viewState.postValue(AppStartViewState.AuthError)
+                sendEvent(AppStartEvents.AuthError)
             } catch (e: Exception) {
-                _viewState.postValue(AppStartViewState.Error(e.message?:"Error"))
+                sendEvent(AppStartEvents.Error(e.message?:"Error"))
             }
         }
     }
@@ -55,5 +52,11 @@ class AppStartViewModel: ViewModel(), KoinComponent {
 
     private fun initOneSignal() {
         pushNotificationInitializer.initialize()
+    }
+
+    private fun sendEvent(event: AppStartEvents){
+        scope.launch {
+            eventChannel.send(event)
+        }
     }
 }

@@ -1,9 +1,9 @@
 package xyz.getclear.vm.auth
 
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -20,13 +20,13 @@ class AuthViewModel : ViewModel(), KoinComponent {
     private val emailValidator =  EmailValidator()
     private val currencyRepository: CurrencyRepository by inject()
 
-    private val _viewState = MutableLiveData<AuthViewState>(AuthViewState.ViewType(viewType = PageViewType.REGISTER))
-    val viewState : LiveData<AuthViewState> = _viewState
+    private val _viewState = MutableStateFlow<AuthViewState>(AuthViewState.ViewType(viewType = PageViewType.REGISTER))
+    val viewState : StateFlow<AuthViewState> = _viewState
 
     private var isLogin = false
 
     init {
-        _viewState.postValue(AuthViewState.ViewType(PageViewType.REGISTER))
+        updateState(AuthViewState.ViewType(PageViewType.REGISTER))
     }
 
     private fun login(username: String, password: String) {
@@ -34,10 +34,10 @@ class AuthViewModel : ViewModel(), KoinComponent {
             try {
                 userRepository.login(username, password)
                 currencyRepository.getCurrencies()
-                _viewState.postValue(AuthViewState.Success)
+                updateState(AuthViewState.Success)
                 analyticsWrapper.logEvent(EVENT_LOGIN_SUCCESS)
             } catch (e: UserError) {
-                _viewState.postValue(AuthViewState.Error(e.message))
+                updateState(AuthViewState.Error(e.message))
             }
         }
     }
@@ -52,10 +52,10 @@ class AuthViewModel : ViewModel(), KoinComponent {
                     password2
                 )
                 currencyRepository.getCurrencies()
-                _viewState.postValue(AuthViewState.Success)
+                updateState(AuthViewState.Success)
                 analyticsWrapper.logEvent(EVENT_REGISTER_SUCCESS)
             } catch (e: UserError) {
-                _viewState.postValue(AuthViewState.Error(e.message))
+                updateState(AuthViewState.Error(e.message))
             }
         }
     }
@@ -91,11 +91,11 @@ class AuthViewModel : ViewModel(), KoinComponent {
                 analyticsWrapper.logEvent(EVENT_REGISTER_CLICKED)
             }
         }
-        is AuthCommand.WhyEmail -> _viewState.postValue(AuthViewState.EmailDialog)
-        is AuthCommand.TermsAndConditions -> _viewState.postValue(AuthViewState.TermsAndConditions)
+        is AuthCommand.WhyEmail -> updateState(AuthViewState.EmailDialog)
+        is AuthCommand.TermsAndConditions -> updateState(AuthViewState.TermsAndConditions)
         is AuthCommand.ViewType -> {
             isLogin = command.viewType == PageViewType.LOGIN
-            _viewState.postValue(AuthViewState.ViewType(command.viewType))
+            updateState(AuthViewState.ViewType(command.viewType))
         }
     }
 
@@ -112,7 +112,7 @@ class AuthViewModel : ViewModel(), KoinComponent {
             isError = true
         }
         if (isError) {
-            _viewState.postValue(
+            updateState(
                 AuthViewState.Error(
                     usernameError = userError,
                     passwordError = passwordError
@@ -146,7 +146,7 @@ class AuthViewModel : ViewModel(), KoinComponent {
         }
         if (isError || !checkboxRegister) {
             isError = true
-            _viewState.postValue(
+            updateState(
                 AuthViewState.Error(
                     usernameError = userError,
                     passwordError = passwordError,
@@ -156,5 +156,9 @@ class AuthViewModel : ViewModel(), KoinComponent {
             )
         }
         return !isError
+    }
+
+    private fun updateState(state: AuthViewState){
+        _viewState.value = state
     }
 }

@@ -1,9 +1,9 @@
 package xyz.getclear.vm.potPicker
 
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -17,8 +17,8 @@ class PotPickerViewModel : ViewModel(), KoinComponent {
     private val scope: CoroutineScope by inject()
     private val mapper: PotToPotPickerUiModelMapper by inject()
 
-    private val _viewState = MutableLiveData<PotsPickerViewState>(PotsPickerViewState.Loading)
-    val pickerViewState: LiveData<PotsPickerViewState> = _viewState
+    private val _viewState = MutableStateFlow<PotsPickerViewState>(PotsPickerViewState.Loading)
+    val pickerViewState: StateFlow<PotsPickerViewState> = _viewState
 
     fun process(command: PotPickerCommand) {
         when (command) {
@@ -45,8 +45,7 @@ class PotPickerViewModel : ViewModel(), KoinComponent {
         }
     }
 
-
     private fun emmitState(state: PotsPickerViewState) {
-        _viewState.postValue(state)
+        _viewState.value = state
     }
 }

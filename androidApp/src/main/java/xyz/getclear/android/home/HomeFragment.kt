@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,9 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.R
 import xyz.getclear.android.common.ViewBindingHolder
@@ -33,6 +37,8 @@ class HomeFragment : Fragment(),
     ViewBindingHolder<FragmentHomeBinding> by ViewBindingHolderImpl() {
 
     private val viewModel: HomeViewModel by viewModel()
+
+    private var uiStateJob: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,34 +76,42 @@ class HomeFragment : Fragment(),
             })
         }
         resetViews()
-        viewModel.viewState.addObserver  { state ->
-            resetViews()
-            requireBinding {
-                when (state) {
-                    is HomeViewState.Loading -> {
-                        progressHome.visibility = View.VISIBLE
-                    }
-                    is HomeViewState.Data -> {
-                        cardSummary.root.visibility = View.VISIBLE
-                        homeContainer.visibility = View.VISIBLE
-                        displayTransactions(state.data)
-                        showCurrencies(state.trackedCurrencies)
-                        showBalance(state.balance)
-                        state.chartEntries?.let { displayTransactionsChart(it) }
-                    }
-                    is HomeViewState.Error -> {
-                        layoutError.viewHomeError.visibility = View.VISIBLE
-                    }
-                    is HomeViewState.NoPots -> {
-                        layoutNoPots.viewNoPots.visibility = View.VISIBLE
-                    }
-                    is HomeViewState.NoTransactions -> {
-                        layoutNoTransactions.root.visibility = View.VISIBLE
+        uiStateJob = lifecycleScope.launch {
+
+            viewModel.viewState.collect { state ->
+                resetViews()
+                requireBinding {
+                    when (state) {
+                        is HomeViewState.Loading -> {
+                            progressHome.visibility = View.VISIBLE
+                        }
+                        is HomeViewState.Data -> {
+                            cardSummary.root.visibility = View.VISIBLE
+                            homeContainer.visibility = View.VISIBLE
+                            displayTransactions(state.data)
+                            showCurrencies(state.trackedCurrencies)
+                            showBalance(state.balance)
+                            state.chartEntries?.let { displayTransactionsChart(it) }
+                        }
+                        is HomeViewState.Error -> {
+                            layoutError.viewHomeError.visibility = View.VISIBLE
+                        }
+                        is HomeViewState.NoPots -> {
+                            layoutNoPots.viewNoPots.visibility = View.VISIBLE
+                        }
+                        is HomeViewState.NoTransactions -> {
+                            layoutNoTransactions.root.visibility = View.VISIBLE
+                        }
                     }
                 }
             }
         }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onStop() {
+        uiStateJob?.cancel()
+        super.onStop()
     }
 
     private fun displayTransactionsChart(transactions: List<xyz.getclear.domain.reports.Entry>) {

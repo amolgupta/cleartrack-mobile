@@ -6,15 +6,17 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.lifecycle.lifecycleScope
 import xyz.getclear.android.R
 import com.onesignal.OneSignal
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import xyz.getclear.android.BuildConfig
 import xyz.getclear.android.common.BaseActivity
 import xyz.getclear.android.login.AuthActivity
 import xyz.getclear.android.navigation.MainActivity
 import xyz.getclear.vm.appStart.AppStartViewModel
-import xyz.getclear.vm.appStart.AppStartViewState
+import xyz.getclear.vm.appStart.AppStartEvents
 
 class SplashActivity : BaseActivity(), AppStartView {
 
@@ -32,28 +34,19 @@ class SplashActivity : BaseActivity(), AppStartView {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        model.start()
-        model.networkError.addObserver {
-            it?.let {  showError("Could not connect to servers. Please verify your internet connection and try again") }
-        }
-        model.viewState.addObserver { state ->
+        model.eventsFlow.onEach { state ->
             when (state) {
-                is AppStartViewState.Loading -> {
+                is AppStartEvents.Loading -> {
                 }
-                is AppStartViewState.Error -> {
-                    showError(state.error)
-                }
-                is AppStartViewState.Success -> {
-                    launchMainActivity()
-                }
-                is AppStartViewState.AuthError -> {
-                    launchLoginActivity()
-                }
-                is AppStartViewState.UpdateRequired -> {
-                    updateDialog()
-                }
+                is AppStartEvents.Error -> showError(state.error)
+                is AppStartEvents.Success -> launchMainActivity()
+                is AppStartEvents.AuthError -> launchLoginActivity()
+                is AppStartEvents.UpdateRequired -> updateDialog()
+                AppStartEvents.NetworkError -> showError("Could not connect to servers. Please verify your internet connection and try again")
             }
-        }
+        }.launchIn(lifecycleScope)
+        model.start()
+
         initOneSignal()
     }
 

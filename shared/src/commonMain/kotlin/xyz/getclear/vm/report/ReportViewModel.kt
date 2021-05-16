@@ -1,9 +1,9 @@
 package xyz.getclear.vm.report
 
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -21,20 +21,18 @@ class ReportViewModel : ViewModel(), KoinComponent {
     private val growthReportMapper: GrowthReportMapper by inject()
     private val scope: CoroutineScope by inject()
 
-    private val _viewState = MutableLiveData(ReportState())
-    val viewState: LiveData<ReportState> = _viewState
+    private val _viewState = MutableStateFlow(ReportState())
+    val viewState: StateFlow<ReportState> = _viewState
 
     init {
         scope.launch {
             val pots = dataRepository.getAllPots()
-            _viewState.postValue(
-                ReportState
-                    (
+            _viewState.value =
+                ReportState(
                     currencyReport = trackedCurrenciesReportMapper(pots),
                     riskReport = riskMapper(pots).toList(),
                     growthReport = growthReportMapper(pots)
                 )
-            )
         }
     }
 }

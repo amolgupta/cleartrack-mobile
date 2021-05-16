@@ -1,8 +1,8 @@
 package xyz.getclear.vm.addTransaction
 
-import dev.icerock.moko.mvvm.livedata.MediatorLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
@@ -23,7 +23,7 @@ class AddTransactionViewModel : ViewModel(), KoinComponent {
     private val today: LocalDate by inject()
     private var potId: String? = null
 
-    val viewState = MediatorLiveData<AddTransactionViewState>( AddTransactionViewState.Loading)
+    val viewState = MutableStateFlow<AddTransactionViewState>(AddTransactionViewState.Loading)
 
     fun addTransaction(value: Float, date: LocalDate) {
         val transaction = potId?.let {
@@ -44,18 +44,18 @@ class AddTransactionViewModel : ViewModel(), KoinComponent {
     }
 
     private fun handleUi(block: suspend () -> Transaction?) {
-        viewState.postValue(AddTransactionViewState.Loading)
+        updateValue(AddTransactionViewState.Loading)
         scope.launch {
             try {
                 val tx = block()
                 if (tx != null && isActive) {
-                    viewState.postValue(AddTransactionViewState.Complete)
+                    updateValue(AddTransactionViewState.Complete)
                 } else {
-                    viewState.postValue(AddTransactionViewState.Error("Unable to update"))
+                    updateValue(AddTransactionViewState.Error("Unable to update"))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                viewState.postValue(e.message.let { AddTransactionViewState.Error(it ?: "Error") })
+                updateValue(e.message.let { AddTransactionViewState.Error(it ?: "Error") })
             }
         }
 
@@ -66,9 +66,9 @@ class AddTransactionViewModel : ViewModel(), KoinComponent {
         scope.launch {
             val pot = potId?.let { dataRepository.getPot(it) }
             if (pot == null) {
-                viewState.postValue(AddTransactionViewState.Error("Pot not found"))
+                updateValue(AddTransactionViewState.Error("Pot not found"))
             } else {
-                viewState.postValue(
+                updateValue(
                     AddTransactionViewState.Data(
                         pot.name,
                         pot.currentBalance(),
@@ -77,5 +77,9 @@ class AddTransactionViewModel : ViewModel(), KoinComponent {
                 )
             }
         }
+    }
+
+    private fun updateValue(state: AddTransactionViewState) {
+        viewState.value = state
     }
 }

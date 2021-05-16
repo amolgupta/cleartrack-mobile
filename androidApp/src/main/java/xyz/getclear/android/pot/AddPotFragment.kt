@@ -5,7 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
@@ -17,6 +21,7 @@ class AddPotFragment : Fragment(),
     ViewBindingHolder<FragmentAddPotBinding> by ViewBindingHolderImpl() {
     private val args: AddPotFragmentArgs by navArgs()
     private var potId: String? = null
+    private var uiStateJob: Job? = null
 
     private val model: AddPotViewModel by viewModel()
 
@@ -50,16 +55,25 @@ class AddPotFragment : Fragment(),
             }
         }
         model.start(potId)
-        model.viewState.addObserver { state ->
-            when (state) {
-                is AddPotViewState.Data -> renderState(state) {
-                    model.addTag(it)
-                }
-                is AddPotViewState.Error -> showError(state.error)
-                is AddPotViewState.Success -> finish()
-                is AddPotViewState.Loading -> {
+
+        uiStateJob = lifecycleScope.launch {
+
+            model.viewState.collect { state ->
+                when (state) {
+                    is AddPotViewState.Data -> renderState(state) {
+                        model.addTag(it)
+                    }
+                    is AddPotViewState.Error -> showError(state.error)
+                    is AddPotViewState.Success -> finish()
+                    is AddPotViewState.Loading -> {
+                    }
                 }
             }
         }
+    }
+
+    override fun onStop() {
+        uiStateJob?.cancel()
+        super.onStop()
     }
 }

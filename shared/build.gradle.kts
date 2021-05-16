@@ -11,6 +11,7 @@ plugins {
 group = "xyz.cleartrack"
 version = "0.1-SNAPSHOT"
 
+
 kotlin {
     android()
     ios()
@@ -23,7 +24,6 @@ kotlin {
             val koinVersion = "3.0.1"
             dependencies {
                 api("dev.icerock.moko:mvvm-core:0.9.2") // only ViewModel, EventsDispatcher, Dispatchers.UI
-                api("dev.icerock.moko:mvvm-livedata:0.9.2") // api mvvm-core, LiveData and extensions
 
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
                 implementation("io.ktor:ktor-client-cio:1.5.4")

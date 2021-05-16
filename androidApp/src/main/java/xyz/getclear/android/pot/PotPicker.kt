@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import xyz.getclear.android.databinding.FragmentPotsPickerBinding
 import xyz.getclear.android.transaction.AddTransactionFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,6 +32,7 @@ class PotPicker : Fragment(),
             }
         }
     }
+    private var uiStateJob: Job? = null
 
     private val model: PotPickerViewModel by viewModel()
 
@@ -46,16 +51,23 @@ class PotPicker : Fragment(),
             }
         }
         model.process(PotPickerCommand.Start)
-        model.pickerViewState.addObserver { state ->
-            when (state) {
-                is PotsPickerViewState.Loading -> {
+        uiStateJob = lifecycleScope.launch {
+
+            model.pickerViewState.collect { state ->
+                when (state) {
+                    is PotsPickerViewState.Loading -> {
+                    }
+                    is PotsPickerViewState.Data -> {
+                        displayPots(state.data)
+                    }
+                    else -> throw IllegalStateException()
                 }
-                is PotsPickerViewState.Data -> {
-                    displayPots(state.data)
-                }
-                else -> throw IllegalStateException()
             }
         }
+    }
+    override fun onStop() {
+        uiStateJob?.cancel()
+        super.onStop()
     }
 
     private fun displayPots(pots: List<PotPickerUiModel>) {

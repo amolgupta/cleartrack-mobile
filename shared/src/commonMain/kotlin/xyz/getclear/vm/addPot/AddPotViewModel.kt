@@ -1,9 +1,9 @@
 package xyz.getclear.vm.addPot
 
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -24,15 +24,15 @@ class AddPotViewModel : ViewModel(), KoinComponent {
 
     private var potId: String? = null
 
-    private val _viewState = MutableLiveData<AddPotViewState>(AddPotViewState.Loading)
-    val viewState: LiveData<AddPotViewState> = _viewState
+    private val _viewState = MutableStateFlow<AddPotViewState>(AddPotViewState.Loading)
+    val viewState: StateFlow<AddPotViewState> = _viewState
 
     fun start(potId: String?) {
         this.potId = potId
         emitDataState()
     }
 
-    fun emitDataState(){
+    private fun emitDataState(){
         scope.launch {
             val pot = potId?.let { dataRepository.getPot(it) }
             emitState(
@@ -80,6 +80,6 @@ class AddPotViewModel : ViewModel(), KoinComponent {
     }
 
     private fun emitState(state: AddPotViewState) {
-        _viewState.postValue(state)
+        _viewState.value = state
     }
 }
