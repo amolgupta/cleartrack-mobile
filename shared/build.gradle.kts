@@ -4,7 +4,6 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
-    id("kotlin-android-extensions")
     id("kotlinx-serialization")
     id("koin")
 }
@@ -26,15 +25,15 @@ kotlin {
                 api("dev.icerock.moko:mvvm-core:0.9.2") // only ViewModel, EventsDispatcher, Dispatchers.UI
                 api("dev.icerock.moko:mvvm-livedata:0.9.2") // api mvvm-core, LiveData and extensions
 
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
-                implementation("io.ktor:ktor-client-cio:1.5.1")
-                implementation("io.ktor:ktor-client-core:1.5.1")
-                implementation("io.ktor:ktor-client-serialization:1.5.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2-native-mt") {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+                implementation("io.ktor:ktor-client-cio:1.5.4")
+                implementation("io.ktor:ktor-client-core:1.5.4")
+                implementation("io.ktor:ktor-client-serialization:1.5.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0") {
                     isForce = true
                 }
                 implementation("com.google.code.findbugs:jsr305:3.0.2")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
                 implementation("org.json:json:20201115")
                 implementation("commons-lang:commons-lang:2.6")
                 implementation("io.insert-koin:koin-core:$koinVersion")
@@ -61,7 +60,7 @@ kotlin {
 
         val iosMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-ios:1.5.1")
+                implementation("io.ktor:ktor-client-ios:1.5.4")
             }
         }
     }
