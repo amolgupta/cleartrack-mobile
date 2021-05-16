@@ -15,7 +15,7 @@ import xyz.getclear.data.net.contract.DataRepository
 import xyz.getclear.domain.common.GravatarUrlGenerator
 import xyz.getclear.domain.common.PushNotificationInitializer
 
-class SettingsViewModel : ViewModel(), KoinComponent {
+class SettingsViewModel : KoinComponent {
     private val userRepository: UserRepository by inject()
     private val currencyRepository: CurrencyRepository by inject()
     private val dataRepository: DataRepository by inject()

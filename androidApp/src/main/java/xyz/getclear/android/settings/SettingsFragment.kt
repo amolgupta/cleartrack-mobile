@@ -44,7 +44,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SettingsView,
     private val analyticsWrapper: AnalyticsWrapper by inject()
 
     private val imageLoader: Picasso by inject()
-    private val model: SettingsViewModel by viewModel()
+    private val model: SettingsViewModel by inject()
 
     private var usernamePreference: Preference? = null
     private var subscription: Preference? = null

@@ -83,7 +83,7 @@ val appModule = module {
 
     // ViewModels
     viewModel { AuthViewModel() }
-    viewModel { SettingsViewModel() }
+    factory { SettingsViewModel() }
     viewModel { ReportViewModel() }
     viewModel { DetailsViewModel() }
     viewModel { HomeViewModel() }
