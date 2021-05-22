@@ -12,11 +12,6 @@
         <include
                 android:id="@+id/report_growth"
                 layout="@layout/report_growth" />
-
-        <include
-                android:id="@+id/report_risk"
-                layout="@layout/report_risk" />
-
         <include
                 android:id="@+id/report_currency"
                 layout="@layout/report_currency" />
