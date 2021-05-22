@@ -16,6 +16,7 @@ import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
 import xyz.getclear.android.common.toChartEntry
 import xyz.getclear.android.databinding.FragmentReportsBinding
+import xyz.getclear.vm.report.ReportData
 import xyz.getclear.vm.report.ReportViewModel
 
 class ReportsFragment : Fragment(),
@@ -38,14 +39,17 @@ class ReportsFragment : Fragment(),
 
             viewModel.viewState.collect { state ->
                 requireBinding {
-                    reportCurrency.currencyReportChart.bind(
-                        state.currencyReport.map { it.toChartEntry() },
-                        ContextCompat.getColor(requireContext(), R.color.lineChartLineColor)
-                    )
-                    reportRisk.riskReportChart.addDataSet(
-                        state.riskReport
-                    )
-                    reportGrowth.growthReportChart.addDataSet(state.growthReport)
+                    state.reports.forEach { it ->
+                        when(it){
+                            is ReportData.CurrencyReport -> {
+                                reportCurrency.currencyReportChart.bind(
+                                    it.entries.map { it.toChartEntry() },
+                                    ContextCompat.getColor(requireContext(), R.color.lineChartLineColor)
+                                )
+                            }
+                            is ReportData.GrowthReport -> reportGrowth.growthReportChart.addDataSet(it.entries)
+                        }
+                    }
                 }
             }
         }

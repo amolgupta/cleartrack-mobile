@@ -5,16 +5,17 @@ import xyz.getclear.data.net.CurrencyRepository
 import xyz.getclear.data.utils.currentBalance
 import xyz.getclear.domain.common.Mapper
 import xyz.getclear.domain.reports.BarEntry
+import xyz.getclear.vm.report.ReportData
 
 class TrackedCurrenciesReportMapper constructor(
     private val currencyRepository: CurrencyRepository
-) : Mapper<List<Pot>, List<BarEntry>> {
+) : Mapper<List<Pot>, ReportData.CurrencyReport> {
 
-    override fun invoke(from: List<Pot>): List<BarEntry> {
+    override fun invoke(from: List<Pot>): ReportData.CurrencyReport {
         val currencyList = currencyList(from)
         var i = 0
 
-        return currencyList.map { currency ->
+        val entries = currencyList.map { currency ->
             var baseSum =  0.0f
             var defaultSum = 0.0f
             val fx = currencyRepository.getFxValue(currency)
@@ -29,6 +30,7 @@ class TrackedCurrenciesReportMapper constructor(
                 "$baseSum  $currency"
             )
         }
+        return ReportData.CurrencyReport(entries)
     }
 
     private fun currencyList(data: List<Pot>) =

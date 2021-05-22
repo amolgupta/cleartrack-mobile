@@ -5,11 +5,12 @@ import xyz.getclear.data.data.Pot
 import xyz.getclear.data.net.CurrencyRepository
 import xyz.getclear.domain.common.Mapper
 import xyz.getclear.domain.reports.Entry
+import xyz.getclear.vm.report.ReportData
 
 class GrowthReportMapper constructor(val currencyRepository: CurrencyRepository) :
-    Mapper<List<Pot>, List<Entry>> {
+    Mapper<List<Pot>, ReportData.GrowthReport> {
 
-    override fun invoke(from: List<Pot>): List<Entry> {
+    override fun invoke(from: List<Pot>): ReportData.GrowthReport {
         val output = mutableMapOf<LocalDate, Float>()
         from.forEach { pot ->
             val fx = currencyRepository.getFxValue(pot.currency)
@@ -24,8 +25,9 @@ class GrowthReportMapper constructor(val currencyRepository: CurrencyRepository)
                 }
             }
         }
-        val out = output.map { Entry(it.key, it.value) }.sortedBy { it.x }.drop(1)
-        return out
+        return ReportData.GrowthReport(
+            output.map { Entry(it.key, it.value) }.sortedBy { it.x }.drop(1)
+        )
     }
 
     private fun getStartOfMonth(date: LocalDate): LocalDate {

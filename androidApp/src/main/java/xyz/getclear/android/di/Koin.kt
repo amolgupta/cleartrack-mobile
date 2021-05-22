@@ -37,12 +37,14 @@ import xyz.getclear.vm.home.HomeViewModel
 import xyz.getclear.vm.potList.PotsViewModel
 import xyz.getclear.vm.potPicker.PotPickerViewModel
 import xyz.getclear.vm.pots.PotToPotPickerUiModelMapper
+import xyz.getclear.vm.report.CurrencyReportAdapter
+import xyz.getclear.vm.report.GrowthReportAdapter
+import xyz.getclear.vm.report.ReportAdapter
 import xyz.getclear.vm.report.ReportViewModel
 import xyz.getclear.vm.settings.SettingsViewModel
 import kotlin.coroutines.CoroutineContext
 
 const val ENCRYPTED_PREFS = "encrypted_shared_prefs"
-
 val appModule = module {
     factory<Picasso> { Picasso.get() }
     factory { AndroidEngineConfig() }
