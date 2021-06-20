@@ -12,4 +12,4 @@ rootProject.name = "ClearTrack-Mobile"
 
 include(":androidApp")
 include(":shared")
-
+include(":web")

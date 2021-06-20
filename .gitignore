@@ -32,3 +32,6 @@ iosApp/xcuserdata/
 
 # Pods
 iosApp/Pods
+
+# web
+web/build

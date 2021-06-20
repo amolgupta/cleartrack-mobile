@@ -24,6 +24,10 @@ jobs:
           command: ./gradlew :shared:compileKotlinIosX64
 
       - run:
+          name: Build web
+          command: ./gradlew :web:assemble
+
+      - run:
           name: Build debug apk
           command: ./gradlew assembleDebug
 

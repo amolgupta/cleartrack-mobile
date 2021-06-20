@@ -14,6 +14,10 @@ version = "0.1-SNAPSHOT"
 
 kotlin {
     android()
+    js(IR){
+        useCommonJs()
+        browser()
+    }
     ios()
     cocoapods {
         summary = "This is sample Summary"
@@ -21,10 +25,9 @@ kotlin {
     }
     sourceSets {
         val commonMain by getting {
-            val koinVersion = "3.0.1"
+            val koinVersion = "3.1.0"
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
-                implementation("io.ktor:ktor-client-cio:1.5.4")
                 implementation("io.ktor:ktor-client-core:1.5.4")
                 implementation("io.ktor:ktor-client-serialization:1.5.4")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0") {
@@ -60,6 +63,12 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-ios:1.5.4")
             }
+        }
+        val jsMain by getting {
+
+        }
+        val jsTest by getting {
+
         }
     }
 }
