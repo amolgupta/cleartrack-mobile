@@ -29,6 +29,7 @@ allprojects {
         maven("https://dl.bintray.com/kotlin/kotlin-eap")
         maven("https://kotlin.bintray.com/kotlinx/")
         maven("https://repo1.maven.org/maven2/")
+        maven("https://kotlin.bintray.com/kotlin-js-wrappers/")
     }
 }
 
