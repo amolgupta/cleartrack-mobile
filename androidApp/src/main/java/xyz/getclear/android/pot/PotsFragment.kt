@@ -20,15 +20,15 @@ import xyz.getclear.android.R
 import xyz.getclear.android.databinding.FragmentPotsBinding
 import xyz.getclear.android.details.DetailsFragmentDirections
 import xyz.getclear.android.transaction.AddTransactionFragmentDirections
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
 import xyz.getclear.vm.potList.*
+import org.koin.android.ext.android.inject
 
 class PotsFragment : Fragment(),
     ViewBindingHolder<FragmentPotsBinding> by ViewBindingHolderImpl() {
 
-    private val model: PotsViewModel by viewModel()
+    private val model: PotsViewModel by inject()
 
     private val adapter = PotAdapter()
 

@@ -1,6 +1,5 @@
 package xyz.getclear.vm.addTransaction
 
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.isActive
@@ -15,7 +14,7 @@ import xyz.getclear.data.utils.currentBalance
 import xyz.getclear.domain.common.AnalyticsWrapper
 import xyz.getclear.domain.common.EVENT_ADD_TRANSACTION
 
-class AddTransactionViewModel : ViewModel(), KoinComponent {
+class AddTransactionViewModel : KoinComponent {
     private val dataRepository: DataRepository by inject()
     private val currencyRepository: CurrencyRepository by inject()
     private val scope: CoroutineScope by inject()

@@ -1,6 +1,5 @@
 package xyz.getclear.vm.potPicker
 
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +11,7 @@ import xyz.getclear.vm.pots.PotPickerCommand
 import xyz.getclear.vm.pots.PotToPotPickerUiModelMapper
 import xyz.getclear.vm.pots.PotsPickerViewState
 
-class PotPickerViewModel : ViewModel(), KoinComponent {
+class PotPickerViewModel : KoinComponent {
     private val dataRepository: DataRepository by inject()
     private val scope: CoroutineScope by inject()
     private val mapper: PotToPotPickerUiModelMapper by inject()

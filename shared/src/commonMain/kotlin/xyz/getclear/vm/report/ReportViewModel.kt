@@ -1,6 +1,5 @@
 package xyz.getclear.vm.report
 
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +13,7 @@ import xyz.getclear.domain.reports.mappers.GrowthReportMapper
 import xyz.getclear.domain.reports.mappers.RiskMapper
 import xyz.getclear.domain.reports.mappers.TrackedCurrenciesReportMapper
 
-class ReportViewModel : ViewModel(), KoinComponent {
+class ReportViewModel : KoinComponent {
     private val dataRepository: DataRepository by inject()
     private val trackedCurrenciesReportMapper: TrackedCurrenciesReportMapper by inject()
     private val riskMapper: RiskMapper by inject()

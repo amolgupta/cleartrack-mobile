@@ -11,7 +11,7 @@ import xyz.getclear.android.R
 import com.onesignal.OneSignal
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
 import xyz.getclear.android.common.BaseActivity
 import xyz.getclear.android.login.AuthActivity
 import xyz.getclear.android.navigation.MainActivity
@@ -20,7 +20,7 @@ import xyz.getclear.vm.appStart.AppStartEvents
 
 class SplashActivity : BaseActivity(), AppStartView {
 
-    private val model: AppStartViewModel by viewModel()
+    private val model: AppStartViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

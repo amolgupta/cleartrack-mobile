@@ -9,8 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
+import org.koin.android.ext.android.inject
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
 import xyz.getclear.android.databinding.FragmentAddPotBinding
@@ -23,7 +23,7 @@ class AddPotFragment : Fragment(),
     private var potId: String? = null
     private var uiStateJob: Job? = null
 
-    private val model: AddPotViewModel by viewModel()
+    private val model: AddPotViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,6 +1,5 @@
 package xyz.getclear.vm.potList
 
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +14,7 @@ import xyz.getclear.domain.common.EVENT_ADD_POT_INITIALIZED
 import xyz.getclear.domain.common.EVENT_DELETE_POT
 import xyz.getclear.domain.pots.PotToPotUiModelMapper
 
-class PotsViewModel : ViewModel(), KoinComponent {
+class PotsViewModel : KoinComponent {
     private val dataRepository: DataRepository by inject()
     private val scope: CoroutineScope by inject()
     private val analyticsWrapper: AnalyticsWrapper by inject()
