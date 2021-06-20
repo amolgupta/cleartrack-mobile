@@ -1,6 +1,5 @@
 package xyz.getclear.vm.auth
 
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +12,7 @@ import xyz.getclear.data.net.UserError
 import xyz.getclear.data.net.UserRepository
 import xyz.getclear.domain.common.*
 
-class AuthViewModel : ViewModel(), KoinComponent {
+class AuthViewModel : KoinComponent {
     private val userRepository: UserRepository by inject()
     private val scope: CoroutineScope by inject()
     private val analyticsWrapper: AnalyticsWrapper by inject()

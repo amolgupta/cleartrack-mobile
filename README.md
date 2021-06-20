@@ -17,7 +17,6 @@ This was previously a normal Android project and in a different repository and c
 ### Tech
 - Koin for DI
 - Ktor client for networking
-- Moko for multiplatform ViewModels
 - Kotlin coroutines
 - Jetpack Navigation
 

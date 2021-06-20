@@ -17,12 +17,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
 import xyz.getclear.android.databinding.FragmentAddTransactionBinding
 import xyz.getclear.vm.addTransaction.AddTransactionViewModel
 import xyz.getclear.vm.addTransaction.AddTransactionViewState
+import org.koin.android.ext.android.inject
 
 class AddTransactionFragment : Fragment(),
     ViewBindingHolder<FragmentAddTransactionBinding> by ViewBindingHolderImpl() {
@@ -31,7 +31,7 @@ class AddTransactionFragment : Fragment(),
     private var editingTransaction = false
     private var editingBalance = false
 
-    private val model: AddTransactionViewModel by viewModel()
+    private val model: AddTransactionViewModel by inject()
 
     private val args: AddTransactionFragmentArgs by navArgs()
     private var uiStateJob: Job? = null

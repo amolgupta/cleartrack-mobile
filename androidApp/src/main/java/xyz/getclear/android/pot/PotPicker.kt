@@ -14,13 +14,13 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import xyz.getclear.android.databinding.FragmentPotsPickerBinding
 import xyz.getclear.android.transaction.AddTransactionFragmentDirections
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
 import xyz.getclear.vm.potPicker.PotPickerViewModel
 import xyz.getclear.vm.pots.PotPickerCommand
 import xyz.getclear.vm.pots.PotPickerUiModel
 import xyz.getclear.vm.pots.PotsPickerViewState
+import org.koin.android.ext.android.inject
 
 class PotPicker : Fragment(),
     ViewBindingHolder<FragmentPotsPickerBinding> by ViewBindingHolderImpl() {
@@ -34,7 +34,7 @@ class PotPicker : Fragment(),
     }
     private var uiStateJob: Job? = null
 
-    private val model: PotPickerViewModel by viewModel()
+    private val model: PotPickerViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,

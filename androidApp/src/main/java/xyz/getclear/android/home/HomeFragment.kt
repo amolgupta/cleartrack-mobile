@@ -16,7 +16,7 @@ import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
 import xyz.getclear.android.R
 import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
@@ -36,7 +36,7 @@ val dateFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
 class HomeFragment : Fragment(),
     ViewBindingHolder<FragmentHomeBinding> by ViewBindingHolderImpl() {
 
-    private val viewModel: HomeViewModel by viewModel()
+    private val viewModel: HomeViewModel by inject()
 
     private var uiStateJob: Job? = null
 

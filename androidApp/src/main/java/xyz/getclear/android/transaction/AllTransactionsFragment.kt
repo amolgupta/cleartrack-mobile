@@ -12,7 +12,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import xyz.getclear.android.databinding.FragmentAllTransactionsBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
 import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
 import xyz.getclear.android.details.TransactionsAdapter
@@ -24,7 +24,7 @@ import xyz.getclear.domain.details.TransactionListViewItem
 class AllTransactionsFragment : Fragment(),
     ViewBindingHolder<FragmentAllTransactionsBinding> by ViewBindingHolderImpl() {
 
-    private val model: HomeViewModel by viewModel()
+    private val model: HomeViewModel by inject()
 
     private var uiStateJob: Job? = null
 

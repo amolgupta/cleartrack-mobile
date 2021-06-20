@@ -22,7 +22,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.common.CircleTransform
 import xyz.getclear.android.common.SETTINGS_PREF_NAME
 import xyz.getclear.android.design.themeColor
@@ -44,7 +43,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SettingsView,
     private val analyticsWrapper: AnalyticsWrapper by inject()
 
     private val imageLoader: Picasso by inject()
-    private val model: SettingsViewModel by viewModel()
+    private val model: SettingsViewModel by inject()
 
     private var usernamePreference: Preference? = null
     private var subscription: Preference? = null

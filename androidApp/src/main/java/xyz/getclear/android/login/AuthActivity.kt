@@ -12,26 +12,26 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.lifecycleScope
-import xyz.getclear.android.R
-import xyz.getclear.android.data.BASE_URL
-import xyz.getclear.android.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
+import xyz.getclear.android.R
 import xyz.getclear.android.common.BaseActivity
+import xyz.getclear.android.data.BASE_URL
+import xyz.getclear.android.databinding.ActivityLoginBinding
 import xyz.getclear.android.navigation.MainActivity
-import xyz.getclear.vm.auth.AuthViewModel
 import xyz.getclear.vm.auth.AuthCommand
-import xyz.getclear.vm.auth.PageViewType
+import xyz.getclear.vm.auth.AuthViewModel
 import xyz.getclear.vm.auth.AuthViewState
+import xyz.getclear.vm.auth.PageViewType
+import kotlinx.coroutines.flow.collect
 
 const val TERMS_URL = BASE_URL + "terms/"
 
 class AuthActivity : BaseActivity() {
 
-    private val model: AuthViewModel by viewModel()
+    private val model: AuthViewModel by inject()
 
     private var binding: ActivityLoginBinding? = null
     private var uiStateJob: Job? = null

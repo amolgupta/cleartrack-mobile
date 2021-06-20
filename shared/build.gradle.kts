@@ -23,8 +23,6 @@ kotlin {
         val commonMain by getting {
             val koinVersion = "3.0.1"
             dependencies {
-                api("dev.icerock.moko:mvvm-core:0.9.2") // only ViewModel, EventsDispatcher, Dispatchers.UI
-
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
                 implementation("io.ktor:ktor-client-cio:1.5.4")
                 implementation("io.ktor:ktor-client-core:1.5.4")

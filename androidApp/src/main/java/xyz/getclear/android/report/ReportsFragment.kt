@@ -10,18 +10,18 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.getclear.android.R
 import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
 import xyz.getclear.android.common.toChartEntry
 import xyz.getclear.android.databinding.FragmentReportsBinding
 import xyz.getclear.vm.report.ReportViewModel
+import org.koin.android.ext.android.inject
 
 class ReportsFragment : Fragment(),
     ViewBindingHolder<FragmentReportsBinding> by ViewBindingHolderImpl() {
 
-    private val viewModel: ReportViewModel by viewModel()
+    private val viewModel: ReportViewModel by inject()
     private var uiStateJob: Job? = null
 
     override fun onCreateView(

@@ -1,6 +1,5 @@
 package xyz.getclear.vm.appStart
 
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -14,7 +13,7 @@ import xyz.getclear.data.net.UserRepository
 import xyz.getclear.data.net.contract.NetworkConnectivityUseCase
 import xyz.getclear.domain.common.PushNotificationInitializer
 
-class AppStartViewModel: ViewModel(), KoinComponent {
+class AppStartViewModel: KoinComponent {
     private val userRepository: UserRepository by inject()
     private val currencyRepository: CurrencyRepository by inject()
     private val scope: CoroutineScope by inject()

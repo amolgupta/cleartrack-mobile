@@ -13,9 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
 import xyz.getclear.android.R
 import xyz.getclear.android.common.ViewBindingHolder
 import xyz.getclear.android.common.ViewBindingHolderImpl
@@ -23,6 +22,7 @@ import xyz.getclear.android.databinding.FragmentDetailsBinding
 import xyz.getclear.data.data.DateRange
 import xyz.getclear.vm.details.DetailsEvents
 import xyz.getclear.vm.details.DetailsViewModel
+import kotlinx.coroutines.flow.collect
 
 class DetailsFragment : Fragment(), Toolbar.OnMenuItemClickListener,
     ViewBindingHolder<FragmentDetailsBinding> by ViewBindingHolderImpl() {
@@ -31,7 +31,7 @@ class DetailsFragment : Fragment(), Toolbar.OnMenuItemClickListener,
 
     private val args: DetailsFragmentArgs by navArgs()
 
-    private val viewModel: DetailsViewModel by viewModel()
+    private val viewModel: DetailsViewModel by inject()
 
     private var uiStateJob: Job? = null
 

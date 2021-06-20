@@ -1,6 +1,5 @@
 package xyz.getclear.vm.home
 
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +17,7 @@ import xyz.getclear.domain.home.GrowthMapper
 import xyz.getclear.domain.home.PotsToTransactionListViewItemMapper
 import xyz.getclear.domain.home.TrackedCurrenciesMapper
 
-class HomeViewModel : ViewModel(), KoinComponent {
+class HomeViewModel : KoinComponent {
     private val dataRepository: DataRepository by inject()
     private val mapper: PotsToTransactionListViewItemMapper by inject()
     private val scope: CoroutineScope by inject()

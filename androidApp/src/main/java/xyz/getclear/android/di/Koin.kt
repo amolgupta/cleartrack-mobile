@@ -10,7 +10,6 @@ import io.ktor.client.engine.android.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import xyz.getclear.android.analytics.AnalyticsWrapperImpl
@@ -82,14 +81,14 @@ val appModule = module {
     factory { AppliedTags() }
 
     // ViewModels
-    viewModel { AuthViewModel() }
-    viewModel { SettingsViewModel() }
-    viewModel { ReportViewModel() }
-    viewModel { DetailsViewModel() }
-    viewModel { HomeViewModel() }
-    viewModel { AddTransactionViewModel() }
-    viewModel { PotsViewModel() }
-    viewModel { AddPotViewModel() }
-    viewModel { AppStartViewModel() }
-    viewModel { PotPickerViewModel() }
+    factory { AuthViewModel() }
+    factory { SettingsViewModel() }
+    factory { ReportViewModel() }
+    factory { DetailsViewModel() }
+    factory { HomeViewModel() }
+    factory { AddTransactionViewModel() }
+    factory { PotsViewModel() }
+    factory { AddPotViewModel() }
+    factory { AppStartViewModel() }
+    factory { PotPickerViewModel() }
 }

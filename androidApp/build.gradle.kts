@@ -16,7 +16,7 @@ dependencies {
     val koinVersion = "3.0.1"
 
     implementation(project(":shared"))
-    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.appcompat:appcompat:1.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
     implementation("io.insert-koin:koin-core:$koinVersion")
@@ -25,7 +25,7 @@ dependencies {
     implementation("io.insert-koin:koin-android:$koinVersion")
 
     api("androidx.constraintlayout:constraintlayout:2.0.4")
-    api("androidx.core:core-ktx:1.3.2")
+    api("androidx.core:core-ktx:1.5.0")
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
@@ -41,7 +41,7 @@ dependencies {
 
     api("com.google.firebase:firebase-core:19.0.0")
     api("com.google.firebase:firebase-analytics:19.0.0")
-    api("com.google.firebase:firebase-perf-ktx:20.0.0")
+    api("com.google.firebase:firebase-perf-ktx:20.0.1")
     api("com.onesignal:OneSignal:[4.0.0, 4.99.99]") {
         exclude("com.google.android")
     }
