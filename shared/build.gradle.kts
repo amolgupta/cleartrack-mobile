@@ -25,7 +25,7 @@ kotlin {
     }
     sourceSets {
         val commonMain by getting {
-            val koinVersion = "3.1.0"
+            val koinVersion = "3.1.2"
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
                 implementation("io.ktor:ktor-client-core:1.5.4")
@@ -49,7 +49,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("com.google.android.material:material:1.3.0")
+                implementation("com.google.android.material:material:1.4.0")
             }
         }
         val androidTest by getting {

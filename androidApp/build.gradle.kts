@@ -13,19 +13,18 @@ group = "xyz.cleartrack"
 version = "0.1-SNAPSHOT"
 
 dependencies {
-    val koinVersion = "3.0.1"
+    val koinVersion = "3.1.2"
 
     implementation(project(":shared"))
-    implementation("androidx.appcompat:appcompat:1.3.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
 
     implementation("io.insert-koin:koin-core:$koinVersion")
-    implementation("io.insert-koin:koin-core-ext:$koinVersion")
     implementation("io.insert-koin:koin-android-compat:$koinVersion")
     implementation("io.insert-koin:koin-android:$koinVersion")
 
-    api("androidx.constraintlayout:constraintlayout:2.0.4")
-    api("androidx.core:core-ktx:1.5.0")
+    api("androidx.constraintlayout:constraintlayout:2.1.0")
+    api("androidx.core:core-ktx:1.6.0")
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
@@ -39,16 +38,16 @@ dependencies {
     implementation("io.ktor:ktor-client-android:1.5.4")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
 
-    api("com.google.firebase:firebase-core:19.0.0")
-    api("com.google.firebase:firebase-analytics:19.0.0")
-    api("com.google.firebase:firebase-perf-ktx:20.0.1")
+    api("com.google.firebase:firebase-core:19.0.1")
+    api("com.google.firebase:firebase-analytics:19.0.1")
+    api("com.google.firebase:firebase-perf-ktx:20.0.2")
     api("com.onesignal:OneSignal:[4.0.0, 4.99.99]") {
         exclude("com.google.android")
     }
     api("com.squareup.picasso:picasso:2.71828")
 
-    api("com.google.android.material:material:1.3.0")
-    api("androidx.appcompat:appcompat:1.2.0")
+    api("com.google.android.material:material:1.4.0")
+    api("androidx.appcompat:appcompat:1.3.1")
     api("androidx.legacy:legacy-support-v4:1.0.0")
     api("com.github.PhilJay:MPAndroidChart:v3.1.0-alpha")
 }
