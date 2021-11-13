@@ -7,6 +7,7 @@ This is a Kotlin multiplatform demo project. I have been using this project to t
 The app is available on [play store](https://play.google.com/store/apps/details?id=xyz.getclear.app). The backend runs is built with Django using this [cookiecutter](https://github.com/pydanny/cookiecutter-django) and is hosted on heroku with a micro instance.
 This was previously a normal Android project and in a different repository and commits do not go all the way back. Some code has not been moved yet (like all test cases)
 
+
 ### Key Features
 - Track accounts in multiple currencies and crypto currencies
 - Charts and reports
